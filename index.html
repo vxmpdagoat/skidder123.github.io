@@ -1,0 +1,273 @@
+@@ -0,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fright</title>
+  <link rel="icon" type="image/jpeg" href="icon.jpg" />
+  <link rel="stylesheet" href="https://unpkg.com/98.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Pixelated MS Sans Serif', Arial, sans-serif;
+      font-size: 11px;
+    }
+    #retro-os-container {
+      background: #000;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1000;
+    }
+    #login-screen {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .window {
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 5px 5px 0 #000;
+    }
+    fieldset {
+      padding: 10px;
+    }
+    select {
+      width: 100%;
+      height: 25px;
+      margin-top: 5px;
+    }
+    p {
+      margin: 0 0 5px;
+    }
+    .window-actions {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px;
+    }
+    .window-action-button {
+      min-width: 75px;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+    #desktop-screen {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://i.pinimg.com/736x/f9/53/39/f9533969c5d6ed322e1afc9f8a3dcf04.jpg') no-repeat 100% center;
+      background-size: 25%;
+      color: white;
+      padding-top: 15px;
+      position: relative;
+    }
+    .desktop-icons {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .desktop-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+      text-shadow: 1px 1px 0 #000;
+      cursor: pointer;
+    }
+    .desktop-icon-img {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 5px;
+      background-size: cover;
+      background-position: center;
+    }
+    .theory-icon .desktop-icon-img {
+      background-image: url('https://i.pinimg.com/736x/a1/6b/f0/a16bf033a9c6ef7f831023840b49e237.jpg');
+    }
+    .juvinal-icon .desktop-icon-img {
+      background-image: url('https://i.pinimg.com/736x/28/cc/eb/28cceb9d4c85f95635bf00f3fa7c875b.jpg');
+    }
+    .wise-icon .desktop-icon-img {
+      background-image: url('https://i.pinimg.com/736x/b9/ca/db/b9cadb718be9801b33488b37d7023a2f.jpg');
+    }
+    .cupid-icon .desktop-icon-img {
+      background-image: url('https://i.pinimg.com/736x/c8/1c/54/c81c54967d01909dc3e4ff9305ce470d.jpg');
+    }
+    .taskbar {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      height: 45px;
+      background: #c0c0c0;
+      border-top: 2px solid white;
+      border-left: 2px solid white;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    .start-button {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-weight: bold;
+      font-size: 11px;
+      background: #c0c0c0;
+      border: 1px solid black;
+      border-top-color: white;
+      border-left-color: white;
+      border-right-color: gray;
+      border-bottom-color: gray;
+      box-shadow: 1px 1px 0 black, inset -1px -1px 0 gray;
+      margin-left: 5px;
+      margin-top: -3px;
+      cursor: pointer;
+    }
+    .start-button:active {
+      border-top-color: gray;
+      border-left-color: gray;
+      border-right-color: white;
+      border-bottom-color: white;
+      box-shadow: 1px 1px 0 white, inset -1px -1px 0 black, inset 1px 1px 0 gray;
+    }
+    .start-button img {
+      width: 24px;
+      height: 24px;
+      margin-right: 4px;
+    }
+    .taskbar-time {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 25px;
+      background: #c0c0c0;
+      border: 1px solid black;
+      border-top-color: gray;
+      border-left-color: gray;
+      border-right-color: white;
+      border-bottom-color: white;
+      box-shadow: inset 1px 1px 0 black, inset -1px -1px 0 white;
+      font-size: 11px;
+      color: black !important;
+      margin-top: -3px;
+    }
+    .desktop-icon span {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="retro-os-container">
+    <div id="login-screen">
+      <div class="window enter-screen">
+        <div class="title-bar">
+          <div class="title-bar-text">User Login</div>
+          <div class="title-bar-controls">
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-wrapper">
+          <div class="window-content">
+            <form>
+              <fieldset>
+                <legend>Login</legend>
+                <p>Select a user to login to</p>
+                <select name="wallpaper">
+                  <option>Fright</option>
+                </select>
+              </fieldset>
+            </form>
+          </div>
+          <div class="window-actions">
+            <button id="ok-button" class="window-action-button main">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="desktop-screen">
+      <div class="desktop-icons">
+        <div class="desktop-icon theory-icon">
+          <div class="desktop-icon-img"></div>
+          <span>Theory</span>
+        </div>
+        <div class="desktop-icon juvinal-icon">
+          <div class="desktop-icon-img"></div>
+          <span>Juvinal</span>
+        </div>
+        <div class="desktop-icon wise-icon">
+          <div class="desktop-icon-img"></div>
+          <span>Wise</span>
+        </div>
+        <div class="desktop-icon cupid-icon">
+          <div class="desktop-icon-img"></div>
+          <span>Cupid</span>
+        </div>
+      </div>
+
+      <div class="taskbar">
+        <button class="start-button">
+          <img src="https://static.vecteezy.com/system/resources/previews/023/741/064/non_2x/telegram-logo-icon-social-media-icon-free-png.png" alt="Telegram Logo" />
+          <span>Telegram</span>
+        </button>
+        <div class="taskbar-time">
+          <span id="current-time"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="startup-sound" src="song.mp3"></audio>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const okBtn = document.getElementById('ok-button');
+      const login = document.getElementById('login-screen');
+      const desktop = document.getElementById('desktop-screen');
+      const clock = document.getElementById('current-time');
+      const audio = document.getElementById('startup-sound');
+
+      const showTime = () => {
+        const now = new Date();
+        let hrs = now.getHours();
+        const mins = now.getMinutes().toString().padStart(2, '0');
+        const ampm = hrs >= 12 ? ' PM' : ' AM';
+        hrs = hrs % 12 || 12;
+        clock.textContent = `${hrs}:${mins}${ampm}`;
+      };
+
+      showTime();
+      setInterval(showTime, 60000);
+
+      okBtn.addEventListener('click', () => {
+        login.style.display = 'none';
+        desktop.style.display = 'block';
+        audio.play().catch(() => {});
+      });
+
+      const startBtn = document.querySelector('.start-button');
+      startBtn.addEventListener('click', () => {
+        window.open('https://t.me/frightsh', '_blank');
+      });
+    });
+  </script>
+</body>
+</html>
